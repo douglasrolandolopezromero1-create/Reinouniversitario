@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es" data-anim="full" data-visual="day" data-text="normal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reino de Aldemar — Crónicas del Reino</title>
+<meta name="description" content="Calculadora de nota universitaria con ambientación medieval: presenta tus puntos ante el Consejo del Reino de Aldemar.">
+<meta name="theme-color" content="#1a0f08">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 72'%3E%3Cpath d='M32 8L56 17v20c0 15-10 25-24 31C18 62 8 52 8 37V17z' fill='%234b1f6f' stroke='%23e2b653' stroke-width='4'/%3E%3Cpath d='M32 22v30M21 33h22' stroke='%23e2b653' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;900&family=Cinzel+Decorative:wght@700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-state="menu">
+<a class="skip-link" href="#dock">Saltar al contenido</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3.5 18.5h17M4.5 17l-1.6-9 5 3.8L12 5l4.1 6.8 5-3.8-1.6 9z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-scroll" viewBox="0 0 24 24"><path d="M8 4h10a2 2 0 0 1 2 2v1.5a1.5 1.5 0 0 1-1.5 1.5H17M8 4a2.5 2.5 0 0 0-2.5 2.5V17A3 3 0 0 0 8.5 20H17a2 2 0 0 0 2-2V9M9.5 9.5h5.5M9.5 13h5.5M9.5 16.5h3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.4 2.7-6 6-6s6 2.6 6 6"/><circle cx="17.2" cy="9" r="2.4"/><path d="M16.4 14.3c3 .2 4.9 2.4 4.9 5.7"/></g></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M5.5 18.5l2.1-2.1M16.4 7.6l2.1-2.1"/><circle cx="12" cy="12" r="7.2" stroke-dasharray="2 3.2"/></g></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 5.5A2 2 0 0 1 6.5 3.5H19v14.5H6.5a2 2 0 0 0-2 2z"/><path d="M4.5 19.5V5.5"/><path d="M9.6 8.6a2.4 2.4 0 1 1 3.5 2.1c-.8.4-1.1.9-1.1 1.7M12 15.2h.01"/></g></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6.2l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></g></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z" fill="currentColor"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M5 5l10 7-10 7zM17 5h2.4v14H17z" fill="currentColor"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M19 5L9 12l10 7zM7 5H4.6v14H7z" fill="currentColor"/></symbol>
+    <symbol id="i-vol" viewBox="0 0 24 24"><path d="M4 9.5v5h3.8l5 3.8V5.7l-5 3.8z" fill="currentColor"/><path d="M16.2 8.8a4.6 4.6 0 0 1 0 6.4M18.6 6.3a8.2 8.2 0 0 1 0 11.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5v5h3.8l5 3.8V5.7l-5 3.8z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-quill" viewBox="0 0 24 24"><path d="M20.5 3.5C13 4 7.5 8.5 6 16l-2.5 4.5M6 16c3.5 1 7.5-.5 10-4M9 13.5c2-.3 4-1.4 5.5-3.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19zM12 10v5M12 17.6h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v5.5M14 11v5.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cracked" viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 11-7 18-16 22C15 40 8 33 8 22V10z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M24 5l-4 12 7 6-6 9 3 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-castle" viewBox="0 0 24 24"><path d="M4 21V10.5M4 10.5V6h2.5V4H8v2h2V4h4v2h1.5V4H17v2H20v4.5M20 21V10.5M4 10.5h16M6.5 21v-5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.2C6 4 8.4 3.8 12 5v14.3C8.4 18.1 6 18.3 4 19.5zM20 5.2c-2-1.2-4.4-1.4-8-.2v14.3c3.6-1.2 6-1 8 .2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mug" viewBox="0 0 24 24"><path d="M5.5 8h10v9a2.5 2.5 0 0 1-2.5 2.5H8A2.5 2.5 0 0 1 5.5 17z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M15.5 9.5H18a2 2 0 0 1 0 5h-2.5M7.5 5c-.6.7-.6 1.3 0 2M11 5c-.6.7-.6 1.3 0 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-sword" viewBox="0 0 24 24"><path d="M19.5 4.5L10 14M17 3l4 4-2 2-4-4zM4 20l5-5M4 20l1.6-4.2L9 14.4 11 17l-2.4 3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-hut" viewBox="0 0 24 24"><path d="M3 11L12 4l9 7M6 10v9.5h12V10M10 19.5v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3l4.5 6H14l4 5.5h-3L17 19H7l2-4.5H6l4-5.5H7.5zM12 19v2.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15 9l-2 5-4.5 1.5L10.5 10z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/><path d="M12 2.8v2M12 19.2v2M2.8 12h2M19.2 12h2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M19.5 14.8A8.2 8.2 0 1 1 9.2 4.5a6.6 6.6 0 0 0 10.3 10.3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mask" viewBox="0 0 24 24"><path d="M4 8c0 6 3 11 8 11s8-5 8-11c-2.5 1.4-5.3 2-8 2S6.5 9.4 4 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M8.3 10.3h.01M15.7 10.3h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10 14c.7.6 1.3.6 2 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <linearGradient id="crestGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe7a1"/><stop offset=".55" stop-color="#d9a941"/><stop offset="1" stop-color="#8f6420"/></linearGradient>
+    <symbol id="crest" viewBox="0 0 64 72">
+      <path d="M32 8L56 17v20c0 15-10 25-24 31C18 62 8 52 8 37V17z" fill="#4b1f6f" stroke="url(#crestGold)" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M32 8L56 17v20c0 15-10 25-24 31z" fill="#000" opacity=".22"/>
+      <path d="M32 22v30M21 33h22" stroke="url(#crestGold)" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M17 12l4-9 7 6 4-8 4 8 7-6 4 9z" fill="url(#crestGold)" stroke="#6b4a12" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topbar" id="topbar">
+  <button type="button" class="brand" id="brandBtn" aria-label="Reino de Aldemar. Volver al menú principal">
+    <svg class="crest" aria-hidden="true"><use href="#crest"/></svg>
+    <span class="brand-text"><span class="brand-name">Reino de Aldemar</span><span class="brand-sub">Crónicas del Reino</span></span>
+  </button>
+
+  <nav class="nav" id="mainNav" aria-label="Secciones del reino">
+    <button type="button" class="nav-btn" data-nav="hall"><svg class="ico" aria-hidden="true"><use href="#i-crown"/></svg><span>Salón del Trono</span></button>
+    <button type="button" class="nav-btn" data-nav="cronica"><svg class="ico" aria-hidden="true"><use href="#i-scroll"/></svg><span>Crónica</span></button>
+    <button type="button" class="nav-btn" data-nav="personajes"><svg class="ico" aria-hidden="true"><use href="#i-people"/></svg><span>Personajes</span></button>
+    <button type="button" class="nav-btn" data-nav="ajustes"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg><span>Ajustes</span></button>
+    <button type="button" class="nav-btn" data-nav="ayuda"><svg class="ico" aria-hidden="true"><use href="#i-help"/></svg><span>Ayuda</span></button>
+  </nav>
+
+  <div class="top-tools">
+    <div class="rank" role="group" aria-label="Progreso del aprendiz">
+      <span class="rank-lvl" title="Nivel"><span class="sr-only">Nivel </span><b id="lvlNum">1</b></span>
+      <span class="rank-info">
+        <span class="rank-title" id="rankTitle">Aprendiz del Reino</span>
+        <span class="xpbar" id="xpBar" role="progressbar" aria-label="Experiencia hasta el siguiente nivel" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="xpfill" id="xpFill"></span></span>
+      </span>
+    </div>
+    <button type="button" class="icon-btn" id="musicBtn" aria-expanded="false" aria-controls="musicPanel" aria-label="Reproductor de música">
+      <svg class="ico" aria-hidden="true"><use href="#i-note"/></svg><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <button type="button" class="icon-btn menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú de secciones">
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+  <section class="scene" id="scene" aria-label="Salón del Trono" data-scene="trono">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17110c"/><stop offset=".45" stop-color="#3a2e21"/><stop offset="1" stop-color="#2a2117"/></linearGradient>
+        <pattern id="blocks" width="150" height="64" patternUnits="userSpaceOnUse"><path d="M0 1H150M0 33H150M1 1V33M76 33V65" stroke="#000" stroke-opacity=".34" stroke-width="2" fill="none"/><path d="M0 3H150M0 35H150" stroke="#fff" stroke-opacity=".05" stroke-width="1.5" fill="none"/></pattern>
+        <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2c1e"/><stop offset="1" stop-color="#0f0a06"/></linearGradient>
+        <linearGradient id="carpetG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d1c20"/><stop offset="1" stop-color="#a5292d"/></linearGradient>
+        <linearGradient id="colG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#17120d"/><stop offset=".38" stop-color="#4c4033"/><stop offset=".56" stop-color="#6e604e"/><stop offset="1" stop-color="#1c160f"/></linearGradient>
+        <linearGradient id="goldH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe7a1"/><stop offset=".5" stop-color="#d9a941"/><stop offset="1" stop-color="#8f6420"/></linearGradient>
+        <linearGradient id="tapG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f1c66"/><stop offset="1" stop-color="#1c0d33"/></linearGradient>
+        <linearGradient id="banG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a2226"/><stop offset="1" stop-color="#5e1215"/></linearGradient>
+        <linearGradient id="woodG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1a0f08"/><stop offset=".5" stop-color="#3d2415"/><stop offset="1" stop-color="#1a0f08"/></linearGradient>
+        <linearGradient id="rayG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="ray-stop" stop-opacity=".34"/><stop offset="1" class="ray-stop" stop-opacity="0"/></linearGradient>
+        <radialGradient id="glowG"><stop offset="0" stop-color="#ffb552" stop-opacity=".55"/><stop offset=".5" stop-color="#ff8a2a" stop-opacity=".18"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="flameG" cx=".5" cy=".75" r=".6"><stop offset="0" stop-color="#fff6c8"/><stop offset=".4" stop-color="#ffb347"/><stop offset=".8" stop-color="#e5601f"/><stop offset="1" stop-color="#e5601f" stop-opacity="0"/></radialGradient>
+        <clipPath id="winClip"><path d="M-40 110V-40Q-40-70 0-70Q40-70 40-40V110Z"/></clipPath>
+        <g id="torch">
+          <ellipse class="glow" cx="0" cy="-36" rx="130" ry="130" fill="url(#glowG)"/>
+          <path d="M-5 -6L5 -6L4 44L-4 44Z" fill="#3d2415" stroke="#1a0f08" stroke-width="1.4"/>
+          <path d="M-14 -8Q0 8 14 -8L10 -18L-10 -18Z" fill="#5a5147" stroke="#1a1510" stroke-width="1.4"/>
+          <path class="flame" d="M0 -60C10 -48 14 -38 8 -26C5 -20-5 -20-8 -26C-14 -38-8 -50 0 -60Z" fill="url(#flameG)"/>
+          <path class="flame f2" d="M0 -46C5 -40 6 -33 3 -28C1 -25-1 -25-3 -28C-6 -33-4 -40 0 -46Z" fill="#fff3c0" opacity=".85"/>
+        </g>
+        <!-- gradientes adicionales para los nuevos escenarios -->
+        <linearGradient id="hillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3c5a4a"/><stop offset="1" stop-color="#1c3226"/></linearGradient>
+        <radialGradient id="leafG" cx=".4" cy=".25" r=".85"><stop offset="0" stop-color="#4c7a3e"/><stop offset="1" stop-color="#1c3316"/></radialGradient>
+        <linearGradient id="trunkG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f0a06"/><stop offset=".5" stop-color="#2e1d10"/><stop offset="1" stop-color="#0f0a06"/></linearGradient>
+        <linearGradient id="thatchG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b08f4a"/><stop offset="1" stop-color="#6b4f22"/></linearGradient>
+        <linearGradient id="houseG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ddc794"/><stop offset="1" stop-color="#a98a55"/></linearGradient>
+        <radialGradient id="waterG" cx=".5" cy=".35" r=".65"><stop offset="0" stop-color="#7db3d1"/><stop offset="1" stop-color="#173349"/></radialGradient>
+        <linearGradient id="armorG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2c3037"/><stop offset=".5" stop-color="#8b95a3"/><stop offset="1" stop-color="#22262c"/></linearGradient>
+        <linearGradient id="dirtG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a4327"/><stop offset="1" stop-color="#2a1c0f"/></linearGradient>
+        <pattern id="booksPat" width="112" height="64" patternUnits="userSpaceOnUse">
+          <rect width="112" height="64" fill="#241708"/>
+          <rect x="2" y="4" width="12" height="56" fill="#b02a25"/><rect x="16" y="2" width="10" height="58" fill="#c99a2e"/><rect x="28" y="6" width="12" height="54" fill="#3f7d3a"/><rect x="42" y="4" width="10" height="56" fill="#7a34b5"/><rect x="54" y="2" width="12" height="58" fill="#b8702a"/><rect x="68" y="5" width="10" height="55" fill="#4b1f6f"/><rect x="80" y="3" width="12" height="57" fill="#a5292d"/><rect x="94" y="4" width="10" height="56" fill="#8f6420"/>
+        </pattern>
+      </defs>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="trono" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" fill="url(#wallG)"/>
+      <rect width="1200" height="470" fill="url(#blocks)"/>
+      <!-- alcoba del trono -->
+      <path d="M410 472V196Q410 60 600 60Q790 60 790 196V472Z" fill="url(#tapG)" stroke="#7a5416" stroke-width="5"/>
+      <path d="M430 472V200Q430 82 600 82Q770 82 770 200V472Z" fill="none" stroke="#d9a941" stroke-opacity=".5" stroke-width="2"/>
+      <g opacity=".5" stroke="#d9a941" stroke-width="1.6" fill="none"><path d="M470 120v352M530 96v376M600 90v382M670 96v376M730 120v352"/></g>
+      <g transform="translate(600,190)" opacity=".9"><path d="M0-42L32-30v30Q32 28 0 42Q-32 28-32 0V-30Z" fill="none" stroke="url(#goldH)" stroke-width="3.5"/><path d="M0-22V22M-14-2H14" stroke="url(#goldH)" stroke-width="4" stroke-linecap="round"/></g>
+      <!-- ventanas -->
+      <g transform="translate(225,190)">
+        <path d="M-46 150V-30Q-46-80 0-80Q46-80 46-30V150Z" fill="#0c0805" stroke="#6d4f1e" stroke-width="7"/>
+        <g clip-path="url(#winClip)" transform="translate(0,-10) scale(1.1)"><rect x="-44" y="-80" width="88" height="200" class="sky"/><circle cx="14" cy="-30" r="12" class="sun"/><path d="M-44 60Q-15 40 10 58T44 52V130H-44Z" fill="#1c3b52" opacity=".75"/><path d="M-44 84Q-10 64 20 82T44 78V130H-44Z" fill="#16351d" opacity=".9"/></g>
+        <path d="M0-80V150M-46 40H46" stroke="#3a2413" stroke-width="4"/>
+        <path d="M-46 150V-30Q-46-80 0-80Q46-80 46-30V150Z" fill="none" stroke="#a9782f" stroke-width="2.2" opacity=".7"/>
+        <path d="M-62 158H62" stroke="#6d4f1e" stroke-width="10" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(975,190)">
+        <path d="M-46 150V-30Q-46-80 0-80Q46-80 46-30V150Z" fill="#0c0805" stroke="#6d4f1e" stroke-width="7"/>
+        <g clip-path="url(#winClip)" transform="translate(0,-10) scale(1.1)"><rect x="-44" y="-80" width="88" height="200" class="sky"/><circle cx="-14" cy="-24" r="10" class="sun" opacity=".85"/><path d="M-44 66Q-10 44 20 62T44 56V130H-44Z" fill="#1c3b52" opacity=".75"/><path d="M-44 88Q-10 68 20 86T44 82V130H-44Z" fill="#16351d" opacity=".9"/></g>
+        <path d="M0-80V150M-46 40H46" stroke="#3a2413" stroke-width="4"/>
+        <path d="M-46 150V-30Q-46-80 0-80Q46-80 46-30V150Z" fill="none" stroke="#a9782f" stroke-width="2.2" opacity=".7"/>
+        <path d="M-62 158H62" stroke="#6d4f1e" stroke-width="10" stroke-linecap="round"/>
+      </g>
+      <!-- haces de luz -->
+      <g class="rays"><path d="M180 330H270L610 640H330Z" fill="url(#rayG)"/><path d="M930 330H1020L870 640H590Z" fill="url(#rayG)" opacity=".8"/></g>
+      <!-- columnas -->
+      <g id="columns">
+        <g transform="translate(110,0)"><rect x="-32" y="0" width="64" height="472" fill="url(#colG)"/><rect x="-44" y="0" width="88" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-38" y="34" width="76" height="12" fill="#3f352a"/><rect x="-42" y="438" width="84" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><path d="M-12 46V438M12 46V438" stroke="#000" stroke-opacity=".18" stroke-width="3"/></g>
+        <g transform="translate(330,0)"><rect x="-32" y="0" width="64" height="472" fill="url(#colG)"/><rect x="-44" y="0" width="88" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-38" y="34" width="76" height="12" fill="#3f352a"/><rect x="-42" y="438" width="84" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><path d="M-12 46V438M12 46V438" stroke="#000" stroke-opacity=".18" stroke-width="3"/></g>
+        <g transform="translate(870,0)"><rect x="-32" y="0" width="64" height="472" fill="url(#colG)"/><rect x="-44" y="0" width="88" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-38" y="34" width="76" height="12" fill="#3f352a"/><rect x="-42" y="438" width="84" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><path d="M-12 46V438M12 46V438" stroke="#000" stroke-opacity=".18" stroke-width="3"/></g>
+        <g transform="translate(1090,0)"><rect x="-32" y="0" width="64" height="472" fill="url(#colG)"/><rect x="-44" y="0" width="88" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-38" y="34" width="76" height="12" fill="#3f352a"/><rect x="-42" y="438" width="84" height="34" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><path d="M-12 46V438M12 46V438" stroke="#000" stroke-opacity=".18" stroke-width="3"/></g>
+      </g>
+      <!-- estandartes -->
+      <g transform="translate(464,34)"><path d="M-36 0H36V210L0 250L-36 210Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/><path d="M-30 6H30" stroke="#d9a941" stroke-width="2" opacity=".6"/><g transform="translate(0,100)"><path d="M0-30L22-20v22Q22 22 0 32Q-22 22-22 2v-22Z" fill="#f0cf77" stroke="#3a1a0a" stroke-width="2"/><path d="M0-14V16M-9 0H9" stroke="#4b1f6f" stroke-width="3.5" stroke-linecap="round"/></g></g>
+      <g transform="translate(736,34)"><path d="M-36 0H36V210L0 250L-36 210Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/><path d="M-30 6H30" stroke="#d9a941" stroke-width="2" opacity=".6"/><g transform="translate(0,100)"><path d="M0-30L22-20v22Q22 22 0 32Q-22 22-22 2v-22Z" fill="#f0cf77" stroke="#3a1a0a" stroke-width="2"/><path d="M0-14V16M-9 0H9" stroke="#4b1f6f" stroke-width="3.5" stroke-linecap="round"/></g></g>
+      <!-- suelo -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <g stroke="#000" stroke-opacity=".38" stroke-width="2" fill="none">
+        <path d="M-600 640L600 300M-450 640L600 300M-300 640L600 300M-150 640L600 300M0 640L600 300M150 640L600 300M300 640L600 300M450 640L600 300M600 640V300M750 640L600 300M900 640L600 300M1050 640L600 300M1200 640L600 300M1350 640L600 300M1500 640L600 300M1650 640L600 300M1800 640L600 300"/>
+        <path d="M0 480H1200M0 494H1200M0 516H1200M0 552H1200M0 604H1200" stroke-opacity=".3"/>
+      </g>
+      <!-- tarima -->
+      <path d="M452 452H748L764 472H436Z" fill="#6b5c4a" stroke="#1a1510" stroke-width="2"/><path d="M436 472H764V486H436Z" fill="#3f352a" stroke="#1a1510" stroke-width="2"/>
+      <path d="M418 486H782L800 506H400Z" fill="#7a6a56" stroke="#1a1510" stroke-width="2"/><path d="M400 506H800V522H400Z" fill="#3f352a" stroke="#1a1510" stroke-width="2"/>
+      <!-- alfombra -->
+      <path d="M528 452H672L830 640H370Z" fill="url(#carpetG)"/>
+      <path d="M528 452H672L830 640H370Z" fill="none" stroke="url(#goldH)" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M540 456H660L800 640H400Z" fill="none" stroke="#f0cf77" stroke-opacity=".45" stroke-width="2" stroke-dasharray="10 8"/>
+      <!-- trono -->
+      <g id="throne">
+        <path d="M470 470V140Q470 62 530 44H670Q730 62 730 140V470Z" fill="url(#woodG)" stroke="#0f0a06" stroke-width="4"/>
+        <path d="M486 470V146Q486 78 536 62H664Q714 78 714 146V470Z" fill="none" stroke="url(#goldH)" stroke-width="4"/>
+        <path d="M510 470V160Q510 100 552 88H648Q690 100 690 160V470Z" fill="#4b1f6f" opacity=".85"/>
+        <path d="M510 470V160Q510 100 552 88H648Q690 100 690 160V470Z" fill="none" stroke="#d9a941" stroke-opacity=".5" stroke-width="2"/>
+        <path d="M600 38L612 62H588Z" fill="url(#goldH)" stroke="#6b4a12" stroke-width="1.5"/><circle cx="600" cy="34" r="9" fill="url(#goldH)" stroke="#6b4a12" stroke-width="2"/><circle cx="600" cy="34" r="4" fill="#a12522"/>
+        <path d="M470 330H520V470H470ZM680 330H730V470H680Z" fill="#2a170d" stroke="#0f0a06" stroke-width="3"/>
+        <path d="M470 330H520M680 330H730" stroke="url(#goldH)" stroke-width="6"/>
+      </g>
+      <!-- antorchas -->
+      <g transform="translate(330,318)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(870,318)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="castillo" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" fill="url(#wallG)"/>
+      <rect width="1200" height="470" fill="url(#blocks)"/>
+      <!-- ventanas -->
+      <g transform="translate(190,180)">
+        <path d="M-40 160V-20Q-40-70 0-70Q40-70 40-20V160Z" fill="#0c0805" stroke="#6d4f1e" stroke-width="7"/>
+        <g clip-path="url(#winClip)" transform="scale(1.05)"><rect x="-44" y="-80" width="88" height="200" class="sky"/><circle cx="10" cy="-28" r="11" class="sun"/><path d="M-44 60Q-15 42 10 58T44 52V130H-44Z" fill="#1c3b52" opacity=".7"/></g>
+        <path d="M0-70V160M-40 46H40" stroke="#3a2413" stroke-width="4"/>
+        <path d="M-40 160V-20Q-40-70 0-70Q40-70 40-20V160Z" fill="none" stroke="#a9782f" stroke-width="2" opacity=".7"/>
+      </g>
+      <g transform="translate(1010,180)">
+        <path d="M-40 160V-20Q-40-70 0-70Q40-70 40-20V160Z" fill="#0c0805" stroke="#6d4f1e" stroke-width="7"/>
+        <g clip-path="url(#winClip)" transform="scale(1.05)"><rect x="-44" y="-80" width="88" height="200" class="sky"/><circle cx="-10" cy="-24" r="9" class="sun" opacity=".85"/><path d="M-44 66Q-10 46 20 62T44 56V130H-44Z" fill="#1c3b52" opacity=".7"/></g>
+        <path d="M0-70V160M-40 46H40" stroke="#3a2413" stroke-width="4"/>
+        <path d="M-40 160V-20Q-40-70 0-70Q40-70 40-20V160Z" fill="none" stroke="#a9782f" stroke-width="2" opacity=".7"/>
+      </g>
+      <!-- columnas -->
+      <g transform="translate(110,0)"><rect x="-30" y="0" width="60" height="472" fill="url(#colG)"/><rect x="-42" y="0" width="84" height="32" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-40" y="436" width="80" height="32" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/></g>
+      <g transform="translate(1090,0)"><rect x="-30" y="0" width="60" height="472" fill="url(#colG)"/><rect x="-42" y="0" width="84" height="32" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/><rect x="-40" y="436" width="80" height="32" rx="3" fill="#5a4e40" stroke="#1a1510" stroke-width="2"/></g>
+      <!-- estandartes -->
+      <g transform="translate(300,34)"><path d="M-30 0H30V180L0 214L-30 180Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/></g>
+      <g transform="translate(900,34)"><path d="M-30 0H30V180L0 214L-30 180Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/></g>
+      <!-- chimenea monumental -->
+      <g transform="translate(600,0)">
+        <path d="M-190 472V210Q-190 40 0 40Q190 40 190 210V472Z" fill="url(#colG)" stroke="#0f0a06" stroke-width="5"/>
+        <path d="M-160 472V220Q-160 84 0 84Q160 84 160 220V472Z" fill="#120a06" stroke="#7a5416" stroke-width="4"/>
+        <path d="M-68 472C-68 410-30 372 0 372C30 372 68 410 68 472Z" fill="url(#flameG)"/>
+        <ellipse cx="0" cy="472" rx="86" ry="16" fill="#e5601f" opacity=".35"/>
+      </g>
+      <!-- armaduras -->
+      <g transform="translate(360,380)"><rect x="-16" y="-90" width="32" height="90" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/><circle cx="0" cy="-104" r="18" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/></g>
+      <g transform="translate(840,380)"><rect x="-16" y="-90" width="32" height="90" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/><circle cx="0" cy="-104" r="18" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/></g>
+      <!-- suelo -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <g stroke="#000" stroke-opacity=".38" stroke-width="2" fill="none">
+        <path d="M-600 640L600 300M-150 640L600 300M600 640V300M1350 640L600 300M1800 640L600 300"/>
+        <path d="M0 494H1200M0 552H1200M0 604H1200" stroke-opacity=".3"/>
+      </g>
+      <!-- antorchas -->
+      <g transform="translate(430,340)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(770,340)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="biblioteca" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" fill="url(#wallG)"/>
+      <!-- estantería izquierda -->
+      <g>
+        <rect x="30" y="30" width="290" height="440" fill="url(#booksPat)" stroke="#0f0a06" stroke-width="6"/>
+        <g fill="#241708"><rect x="30" y="108" width="290" height="10"/><rect x="30" y="188" width="290" height="10"/><rect x="30" y="268" width="290" height="10"/><rect x="30" y="348" width="290" height="10"/></g>
+        <rect x="18" y="18" width="314" height="464" fill="none" stroke="url(#goldH)" stroke-width="4"/>
+      </g>
+      <!-- estantería derecha -->
+      <g>
+        <rect x="880" y="30" width="290" height="440" fill="url(#booksPat)" stroke="#0f0a06" stroke-width="6"/>
+        <g fill="#241708"><rect x="880" y="108" width="290" height="10"/><rect x="880" y="188" width="290" height="10"/><rect x="880" y="268" width="290" height="10"/><rect x="880" y="348" width="290" height="10"/></g>
+        <rect x="868" y="18" width="314" height="464" fill="none" stroke="url(#goldH)" stroke-width="4"/>
+      </g>
+      <!-- ventanal central -->
+      <g transform="translate(600,175)">
+        <path d="M-58 190V-40Q-58-100 0-100Q58-100 58-40V190Z" fill="#0c0805" stroke="#6d4f1e" stroke-width="8"/>
+        <g clip-path="url(#winClip)" transform="translate(0,-10) scale(1.4)"><rect x="-44" y="-80" width="88" height="200" class="sky"/><circle cx="12" cy="-30" r="13" class="sun"/></g>
+        <path d="M0-100V190M-58 40H58" stroke="#3a2413" stroke-width="5"/>
+        <path d="M-58 190V-40Q-58-100 0-100Q58-100 58-40V190Z" fill="none" stroke="#a9782f" stroke-width="2.4" opacity=".7"/>
+      </g>
+      <!-- escalera de biblioteca -->
+      <g transform="translate(470,150)" stroke="#3d2415" stroke-width="6" stroke-linecap="round" fill="none" opacity=".9">
+        <path d="M0 300L40-60M60 300L100-60"/><path d="M6 260H54M12 210H60M18 160H66M24 110H72M30 60H78"/>
+      </g>
+      <!-- mesa de lectura -->
+      <g transform="translate(600,420)">
+        <rect x="-90" y="0" width="180" height="14" fill="url(#woodG)" stroke="#0f0a06" stroke-width="2"/>
+        <rect x="-70" y="14" width="12" height="40" fill="#241708"/><rect x="58" y="14" width="12" height="40" fill="#241708"/>
+        <rect x="-30" y="-16" width="46" height="18" fill="#e9dcb0" stroke="#6d4f1e" stroke-width="1.4"/>
+        <g transform="translate(30,-14)"><rect x="-3" y="-14" width="6" height="14" fill="#e9dcb0"/><path class="flame" d="M0-22C4-18 5-14 2-10C1-8-1-8-2-10C-5-14-4-18 0-22Z" fill="url(#flameG)"/></g>
+      </g>
+      <!-- suelo -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <path d="M480 470H720L830 640H370Z" fill="url(#tapG)" opacity=".55"/>
+      <!-- velas de pared -->
+      <g transform="translate(340,300)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(860,300)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="patio" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" class="sky"/>
+      <circle cx="220" cy="120" r="46" class="sun"/>
+      <g class="rays" opacity=".8"><path d="M120 200H320L420 640H0Z" fill="url(#rayG)"/></g>
+      <!-- torre lejana -->
+      <g opacity=".85" fill="url(#hillG)"><rect x="980" y="60" width="90" height="330"/><path d="M980 60L1025 10L1070 60Z"/><rect x="1000" y="120" width="16" height="26"/><rect x="1044" y="120" width="16" height="26"/></g>
+      <!-- muralla izquierda -->
+      <g>
+        <rect x="0" y="180" width="230" height="290" fill="url(#colG)" stroke="#0f0a06" stroke-width="4"/>
+        <g fill="url(#colG)" stroke="#0f0a06" stroke-width="3"><rect x="0" y="150" width="40" height="34"/><rect x="60" y="150" width="40" height="34"/><rect x="120" y="150" width="40" height="34"/><rect x="180" y="150" width="40" height="34"/></g>
+      </g>
+      <!-- muralla derecha -->
+      <g>
+        <rect x="970" y="180" width="230" height="290" fill="url(#colG)" stroke="#0f0a06" stroke-width="4"/>
+        <g fill="url(#colG)" stroke="#0f0a06" stroke-width="3"><rect x="970" y="150" width="40" height="34"/><rect x="1030" y="150" width="40" height="34"/><rect x="1090" y="150" width="40" height="34"/><rect x="1150" y="150" width="40" height="34"/></g>
+      </g>
+      <!-- estandartes en la muralla -->
+      <g transform="translate(115,190)"><path d="M-24 0H24V140L0 168L-24 140Z" fill="url(#banG)" stroke="#d9a941" stroke-width="2.4"/></g>
+      <g transform="translate(1085,190)"><path d="M-24 0H24V140L0 168L-24 140Z" fill="url(#banG)" stroke="#d9a941" stroke-width="2.4"/></g>
+      <!-- suelo adoquinado -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <g stroke="#000" stroke-opacity=".3" stroke-width="2" fill="none">
+        <path d="M0 500H1200M0 540H1200M0 590H1200"/>
+        <path d="M60 470V640M180 470V640M300 470V640M420 470V640M540 470V640M660 470V640M780 470V640M900 470V640M1020 470V640M1140 470V640"/>
+      </g>
+      <!-- pozo -->
+      <g transform="translate(600,470)">
+        <ellipse cx="0" cy="10" rx="92" ry="26" fill="#241708"/>
+        <ellipse cx="0" cy="4" rx="80" ry="20" fill="url(#waterG)"/>
+        <rect x="-96" y="10" width="192" height="46" fill="url(#colG)" stroke="#0f0a06" stroke-width="3"/>
+        <rect x="-108" y="-78" width="14" height="90" fill="url(#woodG)"/><rect x="94" y="-78" width="14" height="90" fill="url(#woodG)"/>
+        <rect x="-112" y="-90" width="224" height="14" fill="url(#woodG)" stroke="#0f0a06" stroke-width="2"/>
+        <path d="M0-80V-14" stroke="#3a2413" stroke-width="3"/>
+      </g>
+      <!-- antorchas en la muralla -->
+      <g transform="translate(150,330)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(1050,330)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="taberna" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" fill="url(#woodG)"/>
+      <rect width="1200" height="470" fill="url(#blocks)" opacity=".28"/>
+      <!-- vigas -->
+      <g stroke="#0f0a06" stroke-width="10" opacity=".8"><path d="M0 40H1200M0 100H1200"/></g>
+      <!-- barriles apilados -->
+      <g transform="translate(120,470)">
+        <ellipse cx="0" cy="0" rx="70" ry="18" fill="#241708"/>
+        <rect x="-70" y="-100" width="140" height="100" rx="20" fill="url(#woodG)" stroke="#0f0a06" stroke-width="3"/>
+        <ellipse cx="0" cy="-100" rx="70" ry="18" fill="#4a3016" stroke="#0f0a06" stroke-width="3"/>
+        <g stroke="#0f0a06" stroke-width="4"><path d="M-70-70H70M-70-30H70"/></g>
+        <rect x="-56" y="-190" width="112" height="90" rx="18" fill="url(#woodG)" stroke="#0f0a06" stroke-width="3"/>
+        <ellipse cx="0" cy="-190" rx="56" ry="15" fill="#4a3016" stroke="#0f0a06" stroke-width="3"/>
+      </g>
+      <!-- barra -->
+      <g transform="translate(950,340)">
+        <rect x="-160" y="0" width="320" height="130" fill="url(#woodG)" stroke="#0f0a06" stroke-width="4"/>
+        <rect x="-170" y="-16" width="340" height="18" fill="url(#goldH)" opacity=".8"/>
+        <g stroke="#0f0a06" stroke-width="2" fill="#8b95a3"><rect x="-120" y="-70" width="18" height="20" rx="3"/><rect x="-70" y="-70" width="18" height="20" rx="3"/><rect x="-20" y="-70" width="18" height="20" rx="3"/><rect x="30" y="-70" width="18" height="20" rx="3"/></g>
+        <path d="M-160-60H160" stroke="#0f0a06" stroke-width="4"/>
+      </g>
+      <!-- chimenea pequeña -->
+      <g transform="translate(220,300)">
+        <path d="M-70 170V50Q-70 0 0 0Q70 0 70 50V170Z" fill="url(#colG)" stroke="#0f0a06" stroke-width="4"/>
+        <path d="M-52 170V60Q-52 22 0 22Q52 22 52 60V170Z" fill="#120a06"/>
+        <path d="M-30 170C-30 130-14 108 0 108C14 108 30 130 30 170Z" fill="url(#flameG)"/>
+      </g>
+      <!-- mesas -->
+      <g transform="translate(560,500)"><ellipse cx="0" cy="0" rx="70" ry="18" fill="url(#woodG)" stroke="#0f0a06" stroke-width="3"/><rect x="-8" y="-48" width="16" height="48" fill="#241708"/></g>
+      <g transform="translate(760,560)"><ellipse cx="0" cy="0" rx="70" ry="18" fill="url(#woodG)" stroke="#0f0a06" stroke-width="3"/><rect x="-8" y="-48" width="16" height="48" fill="#241708"/></g>
+      <!-- suelo -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <g stroke="#000" stroke-opacity=".3" stroke-width="2"><path d="M0 490H1200M0 540H1200M0 596H1200"/></g>
+      <!-- faroles -->
+      <g transform="translate(400,220)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(1080,220)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="entrenamiento" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" fill="url(#wallG)"/>
+      <rect width="1200" height="470" fill="url(#blocks)"/>
+      <!-- estante de armas izquierda -->
+      <g transform="translate(150,120)">
+        <rect x="-80" y="0" width="160" height="300" fill="url(#woodG)" stroke="#0f0a06" stroke-width="4" opacity=".9"/>
+        <g stroke="url(#armorG)" stroke-width="6" stroke-linecap="round"><path d="M-50 30L20 280M50 30L-20 280"/></g>
+        <circle cx="0" cy="150" r="46" fill="none" stroke="url(#goldH)" stroke-width="5"/>
+        <path d="M0 108L26 150L0 192L-26 150Z" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/>
+      </g>
+      <!-- estante de armas derecha -->
+      <g transform="translate(1050,120)">
+        <rect x="-80" y="0" width="160" height="300" fill="url(#woodG)" stroke="#0f0a06" stroke-width="4" opacity=".9"/>
+        <g stroke="url(#armorG)" stroke-width="6" stroke-linecap="round"><path d="M-50 30L20 280M50 30L-20 280"/></g>
+        <circle cx="0" cy="150" r="46" fill="none" stroke="url(#goldH)" stroke-width="5"/>
+        <path d="M0 108L26 150L0 192L-26 150Z" fill="url(#armorG)" stroke="#0f0a06" stroke-width="2"/>
+      </g>
+      <!-- maniquí de entrenamiento -->
+      <g transform="translate(600,300)">
+        <rect x="-8" y="0" width="16" height="170" fill="#5a4327"/>
+        <circle cx="0" cy="-24" r="26" fill="#c99a6a" stroke="#5a4327" stroke-width="3"/>
+        <path d="M-46 30H46M-40 70H40" stroke="#8b6a3a" stroke-width="10" stroke-linecap="round"/>
+        <ellipse cx="0" cy="176" rx="46" ry="12" fill="#241708"/>
+      </g>
+      <!-- estandartes -->
+      <g transform="translate(400,34)"><path d="M-30 0H30V180L0 214L-30 180Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/></g>
+      <g transform="translate(800,34)"><path d="M-30 0H30V180L0 214L-30 180Z" fill="url(#banG)" stroke="#d9a941" stroke-width="3"/></g>
+      <!-- suelo con círculo de entrenamiento -->
+      <rect y="470" width="1200" height="170" fill="url(#floorG)"/>
+      <ellipse cx="600" cy="570" rx="220" ry="48" fill="none" stroke="url(#goldH)" stroke-width="4" stroke-dasharray="14 10" opacity=".7"/>
+      <!-- antorchas -->
+      <g transform="translate(280,320)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(920,320)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="aldea" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" class="sky"/>
+      <circle cx="1000" cy="110" r="50" class="sun"/>
+      <g class="rays" opacity=".7"><path d="M880 200H1120L1200 640H760Z" fill="url(#rayG)"/></g>
+      <!-- colinas lejanas -->
+      <path d="M0 400Q200 340 420 390T900 380T1200 400V470H0Z" fill="url(#hillG)" opacity=".85"/>
+      <!-- casas -->
+      <g transform="translate(180,330)">
+        <rect x="-90" y="30" width="180" height="140" fill="url(#houseG)" stroke="#5a4327" stroke-width="4"/>
+        <path d="M-104 30L0-60L104 30Z" fill="url(#thatchG)" stroke="#3a2413" stroke-width="4"/>
+        <rect x="-20" y="90" width="40" height="80" fill="#241708"/>
+      </g>
+      <g transform="translate(500,300)">
+        <rect x="-110" y="40" width="220" height="170" fill="url(#houseG)" stroke="#5a4327" stroke-width="4"/>
+        <path d="M-126 40L0-70L126 40Z" fill="url(#thatchG)" stroke="#3a2413" stroke-width="4"/>
+        <rect x="-24" y="110" width="48" height="100" fill="#241708"/>
+        <rect x="46" y="90" width="36" height="36" fill="#1c3b52" opacity=".85"/>
+      </g>
+      <g transform="translate(1000,330)">
+        <rect x="-100" y="30" width="200" height="140" fill="url(#houseG)" stroke="#5a4327" stroke-width="4"/>
+        <path d="M-114 30L0-64L114 30Z" fill="url(#thatchG)" stroke="#3a2413" stroke-width="4"/>
+        <rect x="-20" y="90" width="40" height="80" fill="#241708"/>
+      </g>
+      <!-- puesto de mercado -->
+      <g transform="translate(760,420)">
+        <rect x="-70" y="0" width="140" height="60" fill="url(#woodG)" stroke="#0f0a06" stroke-width="3"/>
+        <path d="M-86-46H86L96 0H-96Z" fill="#9a2226" stroke="#5a1a15" stroke-width="3"/>
+        <path d="M-96 0L-86-46M-58 0L-51-46M-19 0L-17-46M19 0L17-46M58 0L51-46M96 0L86-46" stroke="#7a1a15" stroke-width="2" opacity=".6"/>
+      </g>
+      <!-- camino -->
+      <rect y="470" width="1200" height="170" fill="url(#dirtG)"/>
+      <path d="M420 470Q520 560 460 640H740Q660 560 780 470Z" fill="#4a3320" opacity=".55"/>
+      <!-- cerca -->
+      <g stroke="#3d2415" stroke-width="6" stroke-linecap="round" opacity=".85">
+        <path d="M40 470V420M110 470V420M180 470V420M40 430H180"/>
+      </g>
+      <!-- antorchas de la plaza -->
+      <g transform="translate(300,360)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(920,360)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <svg class="hall-bg" data-scene-bg="bosque" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <rect width="1200" height="640" class="sky"/>
+      <circle cx="260" cy="100" r="42" class="sun" opacity=".85"/>
+      <!-- follaje de fondo -->
+      <g opacity=".9">
+        <circle cx="150" cy="140" r="160" fill="url(#leafG)"/>
+        <circle cx="420" cy="90" r="190" fill="url(#leafG)"/>
+        <circle cx="760" cy="120" r="200" fill="url(#leafG)"/>
+        <circle cx="1060" cy="150" r="170" fill="url(#leafG)"/>
+      </g>
+      <g class="rays" opacity=".8"><path d="M340 160H460L560 640H240Z" fill="url(#rayG)"/><path d="M760 160H860L940 640H660Z" fill="url(#rayG)" opacity=".7"/></g>
+      <!-- troncos -->
+      <g>
+        <rect x="40" y="120" width="70" height="420" fill="url(#trunkG)"/>
+        <rect x="1080" y="90" width="80" height="450" fill="url(#trunkG)"/>
+        <rect x="260" y="260" width="46" height="290" fill="url(#trunkG)" opacity=".9"/>
+        <rect x="900" y="240" width="50" height="310" fill="url(#trunkG)" opacity=".9"/>
+      </g>
+      <!-- suelo -->
+      <rect y="470" width="1200" height="170" fill="url(#dirtG)"/>
+      <path d="M0 500Q300 460 600 500T1200 490V640H0Z" fill="#2a1c0f" opacity=".5"/>
+      <!-- fogata -->
+      <g transform="translate(600,540)">
+        <ellipse cx="0" cy="14" rx="70" ry="16" fill="#241708"/>
+        <path d="M-40 10L0-20L40 10Z" fill="#3d2415" stroke="#0f0a06" stroke-width="2"/>
+        <path class="flame" d="M0-54C12-40 16-26 8-12C4-4-4-4-8-12C-16-26-12-40 0-54Z" fill="url(#flameG)"/>
+      </g>
+      <!-- antorchas clavadas -->
+      <g transform="translate(360,420)" class="torch-g"><use href="#torch"/></g>
+      <g transform="translate(840,420)" class="torch-g t2"><use href="#torch"/></g>
+    </svg>
+
+    <div class="hall-tint" aria-hidden="true"><i class="t-day"></i><i class="t-sunset"></i><i class="t-night"></i><i class="t-torch"></i></div>
+    <div class="dust" id="dust" aria-hidden="true"></div>
+    <div class="court" id="court" aria-hidden="true"></div>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="flash" id="flash" aria-hidden="true"></div>
+    <div class="bubbles" id="bubbles" aria-hidden="true"></div>
+  </section>
+
+  <section class="dock" id="dock" aria-label="Panel de acción" tabindex="-1">
+    <div class="dock-inner">
+
+      <div class="panel" data-panel="idle">
+        <div class="idle-card"><svg class="ico big" aria-hidden="true"><use href="#i-crown"/></svg><p>El salón aguarda. Elige «Comenzar» en el menú principal para presentar tus notas.</p></div>
+      </div>
+
+      <div class="panel dlg" data-panel="dialogue" hidden>
+        <div class="dlg-portrait" id="dlgPortrait" aria-hidden="true"></div>
+        <div class="dlg-main">
+          <div class="dlg-plate"><span class="dlg-name" id="dlgName"></span><span class="dlg-role" id="dlgRole"></span></div>
+          <div class="dlg-bubble">
+            <p class="dlg-text" id="dlgText" aria-hidden="true"></p>
+            <div class="dlg-choices" id="dlgChoices" role="group" aria-label="Elige tu respuesta" hidden></div>
+            <div class="dlg-foot" id="dlgFoot">
+              <span class="dlg-count" id="dlgCount" aria-hidden="true"></span>
+              <button type="button" class="link-btn" id="dlgSkipAll">Omitir diálogo</button>
+              <button type="button" class="btn btn-gold" id="dlgNext">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="form" hidden>
+        <div class="parchment">
+          <header class="parch-head">
+            <svg class="ico" aria-hidden="true"><use href="#i-quill"/></svg>
+            <div>
+              <h2 id="formTitle">El Gran Libro de las Calificaciones</h2>
+              <p class="lead">Anota tus puntos y entrégalos al Consejo. Con 60 de 100 o más apruebas.</p>
+            </div>
+          </header>
+          <form id="gradeForm" novalidate aria-labelledby="formTitle">
+            <div class="fields">
+              <div class="field" data-key="tareas">
+                <label for="tareas">Trabajos y tareas</label>
+                <div class="input-wrap"><input id="tareas" name="tareas" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="tareas-hint tareas-err" maxlength="7"><span class="max" aria-hidden="true">/ 80</span></div>
+                <div class="hint" id="tareas-hint">Máximo 80 puntos</div>
+                <div class="err" id="tareas-err"></div>
+              </div>
+              <div class="field" data-key="parcial1">
+                <label for="parcial1">Primer parcial</label>
+                <div class="input-wrap"><input id="parcial1" name="parcial1" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="parcial1-hint parcial1-err" maxlength="7"><span class="max" aria-hidden="true">/ 30</span></div>
+                <div class="hint" id="parcial1-hint">Máximo 30 puntos</div>
+                <div class="err" id="parcial1-err"></div>
+              </div>
+              <div class="field" data-key="parcial2">
+                <label for="parcial2">Segundo parcial</label>
+                <div class="input-wrap"><input id="parcial2" name="parcial2" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="parcial2-hint parcial2-err" maxlength="7"><span class="max" aria-hidden="true">/ 30</span></div>
+                <div class="hint" id="parcial2-hint">Máximo 30 puntos</div>
+                <div class="err" id="parcial2-err"></div>
+              </div>
+              <div class="field" data-key="examen">
+                <label for="examen">Examen final</label>
+                <div class="input-wrap"><input id="examen" name="examen" type="text" inputmode="decimal" autocomplete="off" placeholder="0" aria-describedby="examen-hint examen-err" maxlength="7"><span class="max" aria-hidden="true">/ 30</span></div>
+                <div class="hint" id="examen-hint">Máximo 30 puntos</div>
+                <div class="err" id="examen-err"></div>
+              </div>
+            </div>
+            <div class="form-error" id="formError" role="alert"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-gold btn-lg" id="submitBtn">Entregar al Consejo</button>
+              <button type="button" class="btn btn-parch" id="clearBtn">Limpiar casillas</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="review" hidden>
+        <div class="parchment review">
+          <header class="parch-head">
+            <svg class="ico" aria-hidden="true"><use href="#i-scroll"/></svg>
+            <div>
+              <h2 id="reviewTitle">Sello real</h2>
+              <p class="lead">El escriba anotó tus puntos. ¿Los entregas al rey?</p>
+            </div>
+          </header>
+          <ul class="recap" id="recap"></ul>
+          <div class="form-actions">
+            <button type="button" class="btn btn-gold btn-lg" id="deliverBtn">Entregar al rey</button>
+            <button type="button" class="btn btn-parch" id="reviseBtn">Revisar mis notas</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" data-panel="verdict" hidden>
+        <div class="parchment verdict" id="verdictCard" data-tier="">
+          <p class="v-status" id="vStatus" role="status">El Consejo delibera…</p>
+          <div class="v-grid">
+            <div class="v-score-wrap">
+              <div class="v-score" aria-hidden="true"><span id="vScore">0.00</span><small>/ 100</small></div>
+              <div class="v-seal" id="vSeal" aria-hidden="true"></div>
+            </div>
+            <div class="v-text">
+              <h2 class="v-grade" id="vGrade" tabindex="-1"></h2>
+              <blockquote class="v-king" id="vKing"><p id="vKingText"></p><cite>Rey Aldemar</cite></blockquote>
+              <p class="v-council" id="vCouncil"></p>
+              <p class="v-meaning" id="vMeaning"></p>
+              <p class="v-next" id="vNext"></p>
+              <div class="v-xp" id="vXp"><span id="vXpText"></span></div>
+            </div>
+          </div>
+          <div class="form-actions v-actions" id="vActions">
+            <button type="button" class="btn btn-gold btn-lg" id="btnNueva">Nueva evaluación</button>
+            <button type="button" class="btn btn-parch" id="btnCronica">Ver mi crónica</button>
+            <button type="button" class="btn btn-parch" id="btnMenu">Menú principal</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="title-screen" id="titleScreen">
+    <div class="title-card">
+      <svg class="title-crest" aria-hidden="true"><use href="#crest"/></svg>
+      <h1>Reino de Aldemar</h1>
+      <p class="title-sub">Crónicas del Reino · Consejo Académico</p>
+      <ul class="title-menu" id="titleMenu" role="list">
+        <li><button type="button" class="menu-item primary" data-nav="hall" id="startBtn"><svg class="ico" aria-hidden="true"><use href="#i-crown"/></svg><span class="mi-text"><b id="startLabel">Comenzar evaluación</b><small>Presenta tus notas ante el rey</small></span></button></li>
+        <li><button type="button" class="menu-item" data-nav="cronica"><svg class="ico" aria-hidden="true"><use href="#i-scroll"/></svg><span class="mi-text"><b>Crónica</b><small id="menuChronSub">Historial de evaluaciones</small></span></button></li>
+        <li><button type="button" class="menu-item" data-nav="personajes"><svg class="ico" aria-hidden="true"><use href="#i-people"/></svg><span class="mi-text"><b>Personajes</b><small>Conoce a la corte</small></span></button></li>
+        <li><button type="button" class="menu-item" data-nav="ajustes"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg><span class="mi-text"><b>Ajustes</b><small>Música, voces y animaciones</small></span></button></li>
+        <li><button type="button" class="menu-item" data-nav="ayuda"><svg class="ico" aria-hidden="true"><use href="#i-help"/></svg><span class="mi-text"><b>Ayuda</b><small>Cómo se calcula tu nota</small></span></button></li>
+      </ul>
+      <p class="title-foot" id="titleRank"></p>
+    </div>
+  </div>
+</main>
+
+<div class="modal-layer" id="modalLayer" hidden>
+  <div class="modal" id="modal-cronica" role="dialog" aria-modal="true" aria-labelledby="cronicaTitle" tabindex="-1" hidden>
+    <header class="modal-head"><svg class="ico" aria-hidden="true"><use href="#i-scroll"/></svg><h2 id="cronicaTitle">Crónica del Aprendiz</h2><button type="button" class="modal-x" data-close aria-label="Cerrar crónica"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></header>
+    <div class="modal-body">
+      <p class="lead" id="chronSummary">Registro de tus evaluaciones ante el Consejo Real.</p>
+      <ol class="chron-list" id="chronList"></ol>
+      <div class="empty" id="chronEmpty"><svg class="ico big" aria-hidden="true"><use href="#i-scroll"/></svg><p>La crónica está en blanco. Presenta tu primera evaluación y el escriba la registrará aquí.</p></div>
+    </div>
+    <footer class="modal-foot"><button type="button" class="btn btn-danger" id="clearChronBtn"><svg class="ico" aria-hidden="true"><use href="#i-trash"/></svg>Limpiar historial</button><button type="button" class="btn btn-parch" data-close>Cerrar</button></footer>
+  </div>
+
+  <div class="modal" id="modal-personajes" role="dialog" aria-modal="true" aria-labelledby="persTitle" tabindex="-1" hidden>
+    <header class="modal-head"><svg class="ico" aria-hidden="true"><use href="#i-people"/></svg><h2 id="persTitle">Personajes del Reino</h2><button type="button" class="modal-x" data-close aria-label="Cerrar personajes"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></header>
+    <div class="modal-body"><p class="lead">Quiénes habitan el Salón del Trono.</p><div class="roster" id="roster"></div></div>
+    <footer class="modal-foot"><button type="button" class="btn btn-parch" data-close>Cerrar</button></footer>
+  </div>
+
+  <div class="modal" id="modal-ajustes" role="dialog" aria-modal="true" aria-labelledby="setTitle" tabindex="-1" hidden>
+    <header class="modal-head"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg><h2 id="setTitle">Ajustes</h2><button type="button" class="modal-x" data-close aria-label="Cerrar ajustes"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></header>
+    <div class="modal-body settings">
+      <fieldset class="set-group"><legend>Sonido</legend>
+        <div class="set-row"><span id="lbl-mute">Silenciar todo</span><button type="button" class="switch" role="switch" data-set="masterMute" aria-labelledby="lbl-mute"></button></div>
+        <div class="set-row"><span id="lbl-music">Música</span><button type="button" class="switch" role="switch" data-set="musicOn" aria-labelledby="lbl-music"></button></div>
+        <div class="set-row"><label for="set-musicVol">Volumen de música</label><input type="range" id="set-musicVol" data-range="musicVol" min="0" max="100" step="1"><output data-out="musicVol"></output></div>
+        <div class="set-row"><span id="lbl-sfx">Efectos de sonido</span><button type="button" class="switch" role="switch" data-set="sfxOn" aria-labelledby="lbl-sfx"></button></div>
+        <div class="set-row"><label for="set-sfxVol">Volumen de efectos</label><input type="range" id="set-sfxVol" data-range="sfxVol" min="0" max="100" step="1"><output data-out="sfxVol"></output></div>
+      </fieldset>
+      <fieldset class="set-group"><legend>Voces</legend>
+        <p class="note" id="voiceNote" hidden>Este navegador no ofrece síntesis de voz. El resto de la aplicación funciona con normalidad.</p>
+        <div class="set-row"><span id="lbl-voice">Voz de los personajes</span><button type="button" class="switch" role="switch" data-set="voiceOn" aria-labelledby="lbl-voice"></button></div>
+        <div class="set-row"><label for="set-voiceVol">Volumen de voz</label><input type="range" id="set-voiceVol" data-range="voiceVol" min="0" max="100" step="1"><output data-out="voiceVol"></output></div>
+        <div class="set-row"><label for="set-voiceRate">Velocidad de voz</label><input type="range" id="set-voiceRate" data-range="voiceRate" min="60" max="140" step="5"><output data-out="voiceRate"></output></div>
+        <div class="set-row"><span>Escuchar una muestra</span><button type="button" class="btn btn-parch btn-sm" id="voiceTest">Probar voz</button></div>
+      </fieldset>
+      <fieldset class="set-group"><legend>Pantalla</legend>
+        <div class="set-row col"><span id="lbl-anim">Animaciones</span><div class="seg" role="radiogroup" aria-labelledby="lbl-anim" data-seg="anim"><button type="button" role="radio" data-val="full">Completas</button><button type="button" role="radio" data-val="reduced">Reducidas</button><button type="button" role="radio" data-val="off">Ninguna</button></div></div>
+        <div class="set-row col"><span id="lbl-scenario">Escenario</span><div class="seg scene-seg" role="radiogroup" aria-labelledby="lbl-scenario" data-seg="scenario">
+          <button type="button" role="radio" data-val="trono"><svg class="ico" aria-hidden="true"><use href="#i-crown"/></svg>Salón del Trono</button>
+          <button type="button" role="radio" data-val="castillo"><svg class="ico" aria-hidden="true"><use href="#i-castle"/></svg>Castillo</button>
+          <button type="button" role="radio" data-val="biblioteca"><svg class="ico" aria-hidden="true"><use href="#i-book"/></svg>Biblioteca</button>
+          <button type="button" role="radio" data-val="patio"><svg class="ico" aria-hidden="true"><use href="#i-castle"/></svg>Patio del Castillo</button>
+          <button type="button" role="radio" data-val="taberna"><svg class="ico" aria-hidden="true"><use href="#i-mug"/></svg>Taberna</button>
+          <button type="button" role="radio" data-val="entrenamiento"><svg class="ico" aria-hidden="true"><use href="#i-sword"/></svg>Sala de Entrenamiento</button>
+          <button type="button" role="radio" data-val="aldea"><svg class="ico" aria-hidden="true"><use href="#i-hut"/></svg>Aldea Medieval</button>
+          <button type="button" role="radio" data-val="bosque"><svg class="ico" aria-hidden="true"><use href="#i-tree"/></svg>Bosque</button>
+        </div></div>
+        <div class="set-row col"><span id="lbl-visual">Ambiente y luz</span><div class="seg" role="radiogroup" aria-labelledby="lbl-visual" data-seg="visual"><button type="button" role="radio" data-val="day">Día</button><button type="button" role="radio" data-val="sunset">Atardecer</button><button type="button" role="radio" data-val="night">Noche</button><button type="button" role="radio" data-val="torch">Antorchas</button></div></div>
+        <div class="set-row col"><span id="lbl-text">Tamaño del texto</span><div class="seg" role="radiogroup" aria-labelledby="lbl-text" data-seg="textSize"><button type="button" role="radio" data-val="normal">Normal</button><button type="button" role="radio" data-val="large">Grande</button></div></div>
+      </fieldset>
+      <fieldset class="set-group"><legend>Datos guardados</legend>
+        <div class="set-row"><span>Restablecer ajustes</span><button type="button" class="btn btn-parch btn-sm" id="resetSettings">Restablecer</button></div>
+        <div class="set-row"><span>Borrar progreso y crónica</span><button type="button" class="btn btn-danger btn-sm" id="resetProgress">Borrar todo</button></div>
+      </fieldset>
+    </div>
+    <footer class="modal-foot"><button type="button" class="btn btn-parch" data-close>Cerrar</button></footer>
+  </div>
+
+  <div class="modal" id="modal-ayuda" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1" hidden>
+    <header class="modal-head"><svg class="ico" aria-hidden="true"><use href="#i-help"/></svg><h2 id="helpTitle">Ayuda</h2><button type="button" class="modal-x" data-close aria-label="Cerrar ayuda"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button></header>
+    <div class="modal-body help">
+      <h3>Cómo se juega</h3>
+      <ol class="steps">
+        <li>Entra al salón y saluda al rey.</li>
+        <li>Anota tus puntos: tareas (0 a 80), dos parciales (0 a 30 cada uno) y examen final (0 a 30).</li>
+        <li>Entrega el pergamino. El escriba y el consejero lo revisan.</li>
+        <li>Confirma la entrega y espera el veredicto del rey.</li>
+        <li>Gana experiencia, sube de rango y consulta tu crónica cuando quieras.</li>
+      </ol>
+      <h3>Cómo se calcula la nota</h3>
+      <p>Tareas y parciales forman el 60 % del total: dentro de ese bloque, las tareas pesan 40 % y el promedio de los parciales 60 %. El examen final aporta el 40 % restante. Puedes escribir decimales con punto o con coma.</p>
+      <table class="scale"><caption class="sr-only">Escala de notas</caption><thead><tr><th scope="col">Puntaje</th><th scope="col">Nota</th></tr></thead><tbody>
+        <tr><td>Menos de 60</td><td>Reprobado</td></tr><tr><td>60 a 70</td><td>2</td></tr><tr><td>71 a 80</td><td>3</td></tr><tr><td>81 a 90</td><td>4</td></tr><tr><td>91 a 100</td><td>5</td></tr></tbody></table>
+      <h3>Atajos de teclado</h3>
+      <ul class="keys"><li><kbd>Enter</kbd> o <kbd>Espacio</kbd> avanzan el diálogo.</li><li><kbd>Esc</kbd> cierra ventanas y menús.</li><li><kbd>M</kbd> reproduce o pausa la música.</li></ul>
+    </div>
+    <footer class="modal-foot"><button type="button" class="btn btn-parch" data-close>Cerrar</button></footer>
+  </div>
+
+  <div class="modal small" id="modal-confirm" role="alertdialog" aria-modal="true" aria-labelledby="confTitle" aria-describedby="confText" tabindex="-1" hidden>
+    <header class="modal-head"><svg class="ico" aria-hidden="true"><use href="#i-warn"/></svg><h2 id="confTitle">¿Seguro?</h2></header>
+    <div class="modal-body"><p id="confText"></p></div>
+    <footer class="modal-foot"><button type="button" class="btn btn-parch" id="confNo">Cancelar</button><button type="button" class="btn btn-danger" id="confYes">Confirmar</button></footer>
+  </div>
+</div>
+
+<div class="music-panel" id="musicPanel" role="dialog" aria-label="Reproductor de música" hidden>
+  <div class="mp-head">
+    <div class="mp-title"><span class="mp-track" id="mpTrack">—</span><span class="mp-status" id="mpStatus" role="status">En pausa</span></div>
+    <div class="mp-eq" aria-hidden="true" id="mpEq"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="mp-progress" aria-hidden="true"><i id="mpFill"></i></div>
+  <div class="mp-transport">
+    <button type="button" class="icon-btn" id="mpPrev" aria-label="Pista anterior"><svg class="ico" aria-hidden="true"><use href="#i-prev"/></svg></button>
+    <button type="button" class="icon-btn big" id="mpPlay" aria-label="Reproducir"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></button>
+    <button type="button" class="icon-btn" id="mpNext" aria-label="Pista siguiente"><svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></button>
+    <button type="button" class="icon-btn" id="mpMute" aria-label="Silenciar todo el sonido" aria-pressed="false"><svg class="ico" aria-hidden="true"><use href="#i-vol"/></svg></button>
+  </div>
+  <div class="mp-row"><label for="mpMusicVol">Música</label><input type="range" id="mpMusicVol" data-range="musicVol" min="0" max="100" step="1"></div>
+  <div class="mp-row"><label for="mpSfxVol">Efectos</label><input type="range" id="mpSfxVol" data-range="sfxVol" min="0" max="100" step="1"></div>
+  <div class="mp-row check"><span id="lbl-auto">Cambiar según la escena</span><button type="button" class="switch" role="switch" data-set="autoMood" aria-labelledby="lbl-auto"></button></div>
+  <button type="button" class="mp-list-toggle" id="mpListToggle" aria-expanded="true" aria-controls="mpTracks">
+    <span>Elegir melodía</span>
+    <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+  </button>
+  <div class="mp-tracks" id="mpTracks" role="list" aria-label="Lista de melodías"></div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+<div class="sr-only" id="srLive" role="status" aria-live="polite"></div>
+
+<script src="char-art.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
